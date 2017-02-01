@@ -22,7 +22,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author zaoqi
  */
 public class Main extends JavaPlugin {
-
+    
     @Override
     public void onEnable() {
     }
