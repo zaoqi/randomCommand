@@ -1,8 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//RandomCommand
+//Copyright (C) 2017  zaoqi
+//This program is free software: you can redistribute it and/or modify
+//it under the terms of the GNU Affero General Public License as published
+//by the Free Software Foundation, either version 3 of the License, or
+//(at your option) any later version.
+//This program is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//GNU Affero General Public License for more details.
+//You should have received a copy of the GNU Affero General Public License
+//along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package zaoqi.RandomCommand;
 
 import java.io.BufferedReader;
@@ -58,26 +65,5 @@ public class API {
                 .filter(line -> line.length > 1)
                 .collect(Collectors.toList());
         return list.toArray(new String[list.size()][]);
-    }
-
-    public static String[][] changeAdder(String[][] src) {
-        int c = 0;
-        for (int i = 0; i < src.length; i++) {
-            src[i][0] = String.valueOf(Math.abs(Integer.parseInt(src[i][0])) + c);
-            src[i] = addHeadString(String.valueOf(c), src[i]);
-            c = Integer.parseInt(src[i][1]);
-        }
-        return src;
-    }
-
-    public static int getAdderCount(String[][] src) {
-        return Integer.parseInt(src[src.length - 1][2]);
-    }
-
-    private static String[] addHeadString(String head, String[] array) {
-        String[] r = new String[array.length + 1];
-        r[0] = head;
-        System.arraycopy(array, 0, r, 1, array.length);
-        return r;
     }
 }
