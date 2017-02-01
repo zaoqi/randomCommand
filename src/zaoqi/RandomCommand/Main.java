@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.plugin.java.JavaPlugin;
+import static zaoqi.RandomCommand.API.changeAdder;
 import static zaoqi.RandomCommand.API.cut;
 import static zaoqi.RandomCommand.API.readFile;
 
@@ -33,7 +34,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         try {
-            getLogger().info(Arrays.deepToString(cut(readFile(System.getProperty("user.dir")+File.separator+"luck.conf"))));
+            getLogger().info(Arrays.deepToString(changeAdder(cut(readFile(System.getProperty("user.dir")+File.separator+"luck.conf")))));
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

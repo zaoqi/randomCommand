@@ -55,8 +55,29 @@ public class API {
     public static String[][] cut(String src) {
         List<String[]> list = Arrays.asList(src.split("\n")).stream()
                 .map(line -> line.split(":"))
-                .filter(line -> line.length>1)
+                .filter(line -> line.length > 1)
                 .collect(Collectors.toList());
         return list.toArray(new String[list.size()][]);
+    }
+
+    public static String[][] changeAdder(String[][] src) {
+        int c = 0;
+        for (int i = 0; i < src.length; i++) {
+            src[i][0] = String.valueOf(Math.abs(Integer.parseInt(src[i][0])) + c);
+            src[i] = addHeadString(String.valueOf(c), src[i]);
+            c = Integer.parseInt(src[i][1]);
+        }
+        return src;
+    }
+
+    public static int getAdderCount(String[][] src) {
+        return Integer.parseInt(src[src.length - 1][2]);
+    }
+
+    private static String[] addHeadString(String head, String[] array) {
+        String[] r = new String[array.length + 1];
+        r[0] = head;
+        System.arraycopy(array, 0, r, 1, array.length);
+        return r;
     }
 }
