@@ -15,7 +15,14 @@
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package zaoqi.RandomCommand;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.bukkit.plugin.java.JavaPlugin;
+import static zaoqi.RandomCommand.API.cut;
+import static zaoqi.RandomCommand.API.readFile;
 
 /**
  *
@@ -25,6 +32,11 @@ public class Main extends JavaPlugin {
     
     @Override
     public void onEnable() {
+        try {
+            getLogger().info(Arrays.deepToString(cut(readFile(System.getProperty("user.dir")+File.separator+"luck.conf"))));
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

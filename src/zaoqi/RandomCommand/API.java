@@ -53,9 +53,10 @@ public class API {
     }
 
     public static String[][] cut(String src) {
-        String[] lines = src.split("\n");
-        List<String> list = Arrays.asList(lines);
-        return (String[][]) list.stream().map(line -> line.split(":"))
-                .collect(Collectors.toList()).toArray();
+        List<String[]> list = Arrays.asList(src.split("\n")).stream()
+                .map(line -> line.split(":"))
+                .filter(line -> line.length>1)
+                .collect(Collectors.toList());
+        return list.toArray(new String[list.size()][]);
     }
 }
