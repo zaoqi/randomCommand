@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import org.bukkit.plugin.java.JavaPlugin;
 import static zaoqi.RandomCommand.API.cut;
 import static zaoqi.RandomCommand.API.readFile;
+import static zaoqi.RandomCommand.API.runCommand;
 
 /**
  *
@@ -30,6 +31,7 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         try {
             getLogger().info(Arrays.toString(choose(changeAdder(cut(readFile(System.getProperty("user.dir") + File.separator + "luck.conf"))))));
+            runCommand("points give zaoqi 123");
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -61,7 +63,7 @@ public class Main extends JavaPlugin {
     }
 
     public static String[] choose(String[][] src) throws Exception {
-        int r = Math.abs((int) Math.random()) % getAdderCount(src);
+        int r = Math.abs((int) (Math.random() * 123456789)) % getAdderCount(src);
         for (String[] line : src) {
             if (Integer.parseInt(line[0]) <= r && r < Integer.parseInt(line[1])) {
                 return line;

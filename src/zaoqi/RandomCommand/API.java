@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.black_ixx.playerpoints.PlayerPoints;
 import org.black_ixx.playerpoints.PlayerPointsAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -44,9 +45,9 @@ public class API {
         File file = new File(path);
         StringBuilder result = new StringBuilder();
         BufferedReader br = new BufferedReader(new FileReader(file));//构造一个BufferedReader类来读取文件
-        String s = null;
+        String s;
         while ((s = br.readLine()) != null) {//使用readLine方法，一次读一行
-            result.append(System.lineSeparator() + s);
+            result.append(System.lineSeparator()).append(s);
         }
         br.close();
         return result.toString();
@@ -65,5 +66,9 @@ public class API {
                 .filter(line -> line.length > 1)
                 .collect(Collectors.toList());
         return list.toArray(new String[list.size()][]);
+    }
+
+    public static boolean runCommand(String command) {
+        return Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), command);
     }
 }
