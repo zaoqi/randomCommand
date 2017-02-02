@@ -13,28 +13,24 @@
 package zaoqi.RandomCommand;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.bukkit.command.Command;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.CommandExecutor;
 import static zaoqi.RandomCommand.API.cut;
 import static zaoqi.RandomCommand.API.readFile;
 import static zaoqi.RandomCommand.API.runCommand;
+import static zaoqi.RandomCommand.API.takeMoney;
 
 /**
  *
  * @author zaoqi
  */
-public class Main extends JavaPlugin {
+public class Main extends JavaPlugin implements CommandExecutor {
 
     @Override
     public void onEnable() {
-        try {
-            getLogger().info(Arrays.toString(choose(changeAdder(cut(readFile(System.getProperty("user.dir") + File.separator + "luck.conf"))))));
-            runCommand("points give zaoqi 123");
-        } catch (Exception ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     @Override
@@ -70,5 +66,32 @@ public class Main extends JavaPlugin {
             }
         }
         throw new Exception("!");
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if (!cmd.getName().equals("sunli")) {
+            return false;
+        }
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("This command can only be run by a player.");
+            return false;
+        }
+        Player player = (Player) sender;
+        if (!takeMoney(this, player.getUniqueId(), 50)) {
+            sender.sendMessage("You don't have enough money.");
+            return false;
+        }
+        try {
+            String[] commands = choose(changeAdder(cut(
+                    readFile(System.getProperty("user.dir") + File.separator + "luck.conf")
+            )));
+            for (int i = 2; i < commands.length; i++) {
+                runCommand(commands[i]);
+            }
+        } catch (Exception ex) {
+            getLogger().info(ex.toString());
+        }
+        return true;
     }
 }

@@ -2,3 +2,7 @@ name: RandomCommand
 version: 0.1.0
 main: zaoqi.RandomCommand.Main
 depend: [PlayerPoints]
+commands:
+    sunli:
+        usage: /sunli
+        description: 抽奖

@@ -18,6 +18,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import org.black_ixx.playerpoints.PlayerPoints;
 import org.black_ixx.playerpoints.PlayerPointsAPI;
@@ -30,7 +31,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class API {
 
-    public static boolean takeMoney(JavaPlugin that, String player, int amount) {
+    public static boolean takeMoney(JavaPlugin that, UUID player, int amount) {
         return getPlayerPoints(that).take(player, amount);
     }
 
